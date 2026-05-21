@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 
-import { Analytics } from "@vercel/analytics/react";
-
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://forja-diseno.vercel.app"),
-
+  metadataBase: new URL(
+    "https://forja-diseno.netlify.app"
+  ),
   title: {
     default: "FORJA & Diseño",
     template: "%s | FORJA & Diseño",
@@ -23,7 +22,6 @@ export const metadata: Metadata = {
     "carpintería metálica",
     "mobiliario industrial",
     "cerramientos",
-    "arquitectura metálica",
   ],
 
   openGraph: {
@@ -32,14 +30,6 @@ export const metadata: Metadata = {
     description:
       "Taller premium de herrería arquitectónica y metalurgia contemporánea.",
 
-    url: "https://forja-diseno.vercel.app",
-
-    siteName: "FORJA & Diseño",
-
-    locale: "es_ES",
-
-    type: "website",
-
     images: [
       {
         url: "/og-image.jpg",
@@ -47,6 +37,10 @@ export const metadata: Metadata = {
         height: 630,
       },
     ],
+
+    locale: "es_ES",
+
+    type: "website",
   },
 
   twitter: {
@@ -68,11 +62,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body>
-        {children}
-
-        <Analytics />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

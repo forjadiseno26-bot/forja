@@ -1,6 +1,6 @@
-import { Resend } from "resend";
+export const runtime = 'edge';
 
-export const runtime = "edge";
+import { Resend } from "resend";
 
 export async function POST(req: Request) {
   try {

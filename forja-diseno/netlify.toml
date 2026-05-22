@@ -1,6 +1,3 @@
 [build]
   base = "forja-diseno"
   command = "npm run build"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"

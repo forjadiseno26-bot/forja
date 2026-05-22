@@ -1,3 +1,2 @@
 [build]
-  base = "forja-diseno"
   command = "npm run build"

@@ -1,15 +1,15 @@
-import { Resend } from "resend";
 import { NextResponse } from "next/server";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { Resend } from "resend";
 
 export async function POST(req: Request) {
   try {
-    if (!process.env.RESEND_API_KEY) {
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
       return NextResponse.json(
         {
           success: false,
-          error: "Missing API Key",
+          error: "Missing RESEND_API_KEY",
         },
         {
           status: 500,
@@ -17,34 +17,49 @@ export async function POST(req: Request) {
       );
     }
 
+    const resend = new Resend(apiKey);
+
     const body = await req.json();
 
-    const { name, email, project, message } = body;
+    const {
+      name,
+      email,
+      project,
+      message,
+    } = body;
 
     await resend.emails.send({
       from: "FORJA <onboarding@resend.dev>",
 
-      to: "TUEMAIL@gmail.com",
+      to: "forjadiseno.26@gmail.com",
 
       subject: `Nuevo Proyecto — ${project}`,
 
       html: `
-        <div style="font-family:Arial;padding:40px;background:#000;color:#fff">
-          <h1 style="color:#FF4500;">
-            Nuevo Lead FORJA & Diseño
+        <div style="background:#000;padding:40px;font-family:Arial;color:#fff;">
+          
+          <h1 style="color:#FF6600;margin-bottom:30px;">
+            Nuevo Lead — FORJA & Diseño
           </h1>
 
-          <p><strong>Nombre:</strong> ${name}</p>
+          <p>
+            <strong>Nombre:</strong> ${name}
+          </p>
 
-          <p><strong>Email:</strong> ${email}</p>
+          <p>
+            <strong>Email:</strong> ${email}
+          </p>
 
-          <p><strong>Proyecto:</strong> ${project}</p>
+          <p>
+            <strong>Proyecto:</strong> ${project}
+          </p>
 
-          <div style="margin-top:20px">
+          <div style="margin-top:30px;">
             <strong>Mensaje:</strong>
 
             <p>${message}</p>
           </div>
+
         </div>
       `,
     });
